@@ -4,6 +4,7 @@
 
 # Ignore executable files
 *.exe
+*.txt
 
 # Ignore build output folder
 output/
