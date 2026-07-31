@@ -22,7 +22,7 @@ void bubbleSort(int arr[], int size)
             }
         }
     }
-}
+} 
 
 int main()
 {
