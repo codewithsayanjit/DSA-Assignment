@@ -21,26 +21,20 @@ at position 3 insert 102.50
 
 typedef struct st
 {
-    double price;
+    float n;
     struct st *next;
 } link;
 
 link *head = NULL;
 
-// Option 1: Create List 
-void create(double price)
+// Function for creating a node
+void create(float data)
 {
-    link *ptr, *temp;
+    link *ptr = NULL, *temp = NULL;
 
     ptr = (link *)malloc(sizeof(link));
 
-    if (ptr == NULL)
-    {
-        printf("Memory allocation failed!\n");
-        return;
-    }
-
-    ptr->price = price;
+    ptr->n = data;
     ptr->next = NULL;
 
     if (head == NULL)
@@ -60,161 +54,146 @@ void create(double price)
     }
 }
 
-// Option 2: Traverse List */
+// Function for traversing the linked list
 void traverse()
 {
-    link *temp = head;
+    link *temp;
 
-    if (head == NULL)
-    {
-        printf("List is empty.\n");
-        return;
-    }
+    temp = head;
 
     while (temp != NULL)
     {
-        printf("%.2lf", temp->price);
-
-        if (temp->next != NULL)
-            printf(" -> ");
-
+        printf("%.2f -> ", temp->n);
         temp = temp->next;
     }
 
-    printf("\n");
+    printf("NULL\n");
 }
 
-// Option 3: Search a price
-void search(double item)
+// Function for searching an item
+void search(float item)
 {
-    link *temp = head;
+    link *temp;
+
+    temp = head;
 
     while (temp != NULL)
     {
-        if (temp->price == item)
+        if (temp->n == item)
         {
-            printf("Price %.2lf found in the list.\n", item);
+            printf("Found\n");
             return;
         }
-
-        temp = temp->next;
+        else
+        {
+            temp = temp->next;
+        }
     }
 
-    printf("Price %.2lf not found in the list.\n", item);
+    printf("Not Found\n");
 }
 
-// Option 4: Insert price at Head 
-void insertHead(double item)
+// Function for inserting at head
+void insert_head(float item)
 {
     link *ptr;
 
     ptr = (link *)malloc(sizeof(link));
 
-    if (ptr == NULL)
-    {
-        printf("Memory allocation failed!\n");
-        return;
-    }
-
-    ptr->price = item;
     ptr->next = head;
-    head = ptr;
+    ptr->n = item;
 
-    printf("%.2lf inserted at head.\n", item);
+    head = ptr;
 }
 
-//  Option 5: Insert price at 3rd Position 
-void insertThird(double item)
+// Function for inserting at 3rd position
+void insert_pos3(float item)
 {
     link *ptr, *temp;
-    int i;
-
-    //  A 3rd-position insertion needs at least 2 nodes 
-    if (head == NULL || head->next == NULL)
-    {
-        printf("At least 2 nodes are required.\n");
-        return;
-    }
+    int i = 1;
 
     ptr = (link *)malloc(sizeof(link));
 
-    if (ptr == NULL)
-    {
-        printf("Memory allocation failed!\n");
-        return;
-    }
-
-    ptr->price = item;
+    ptr->next = NULL;
+    ptr->n = item;
 
     temp = head;
 
-    // Move to 2nd node
-    for (i = 1; i < 2; i++)
+    /* Move temp to 2nd node */
+    while (i < 2 && temp != NULL)
     {
         temp = temp->next;
+        i = i + 1;
     }
 
-    // Insert new node at 3rd position
+    if (temp == NULL)
+    {
+        printf("Cannot insert at 3rd position\n");
+        free(ptr);
+        return;
+    }
+
     ptr->next = temp->next;
     temp->next = ptr;
-
-    printf("%.2lf inserted at 3rd position.\n", item);
 }
 
 int main()
 {
-    int choice, i;
-    double price;
+    int choice;
+    float data;
 
     while (1)
     {
-        printf("1. Create List\n");
-        printf("2. Traverse List\n");
-        printf("3. Search Price\n");
-        printf("4. Insert Price at Head\n");
-        printf("5. Insert Price at 3rd Position\n");
-        printf("6. Exit\n");
+        printf("\n1. Create List");
+        printf("\n2. Traverse List");
+        printf("\n3. Search Price");
+        printf("\n4. Insert Price at Head");
+        printf("\n5. Insert Price at 3rd Position");
+        printf("\n6. Exit");
 
-        printf("Enter your choice: ");
+        printf("\nEnter your choice: ");
         scanf("%d", &choice);
 
         switch (choice)
         {
         case 1:
             printf("Enter price: ");
-            scanf("%lf", &price);
-            create(price);
+            scanf("%f", &data);
+
+            create(data);
             break;
 
         case 2:
-            printf("Product Price List: ");
+            printf("Linked List: ");
             traverse();
             break;
 
         case 3:
             printf("Enter price to search: ");
-            scanf("%lf", &price);
-            search(price);
+            scanf("%f", &data);
+
+            search(data);
             break;
 
         case 4:
             printf("Enter new price: ");
-            scanf("%lf", &price);
-            insertHead(price);
+            scanf("%f", &data);
+
+            insert_head(data);
             break;
 
         case 5:
             printf("Enter new price: ");
-            scanf("%lf", &price);
-            insertThird(price);
+            scanf("%f", &data);
+
+            insert_pos3(data);
             break;
 
         case 6:
-            printf("Program ended.\n");
             exit(0);
 
         default:
-            printf("Invalid choice!\n");
+            printf("Invalid choice\n");
         }
     }
 
