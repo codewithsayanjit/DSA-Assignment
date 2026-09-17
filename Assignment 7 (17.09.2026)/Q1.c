@@ -27,7 +27,6 @@ typedef struct st
 
 link *head = NULL;
 
-// Function for creating a node
 void create(float data)
 {
     link *ptr = NULL, *temp = NULL;
@@ -54,7 +53,6 @@ void create(float data)
     }
 }
 
-// Function for traversing the linked list
 void traverse()
 {
     link *temp;
@@ -70,7 +68,6 @@ void traverse()
     printf("NULL\n");
 }
 
-// Function for searching an item
 void search(float item)
 {
     link *temp;
@@ -93,7 +90,6 @@ void search(float item)
     printf("Not Found\n");
 }
 
-// Function for inserting at head
 void insert_head(float item)
 {
     link *ptr;
@@ -106,11 +102,9 @@ void insert_head(float item)
     head = ptr;
 }
 
-// Function for inserting at 3rd position
-void insert_pos3(float item)
+void insert_position(float item, int position)
 {
     link *ptr, *temp;
-    int i = 1;
 
     ptr = (link *)malloc(sizeof(link));
 
@@ -119,18 +113,9 @@ void insert_pos3(float item)
 
     temp = head;
 
-    /* Move temp to 2nd node */
-    while (i < 2 && temp != NULL)
+    for (int i = 1; i < position - 1; i++)
     {
         temp = temp->next;
-        i = i + 1;
-    }
-
-    if (temp == NULL)
-    {
-        printf("Cannot insert at 3rd position\n");
-        free(ptr);
-        return;
     }
 
     ptr->next = temp->next;
@@ -186,7 +171,11 @@ int main()
             printf("Enter new price: ");
             scanf("%f", &data);
 
-            insert_pos3(data);
+            printf("Enter position: ");
+            int position;
+            scanf("%d", &position);
+
+            insert_position(data, position);
             break;
 
         case 6:
