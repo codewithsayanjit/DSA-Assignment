@@ -72,12 +72,8 @@ void dosum()
     while (top != -1)
     {
         amount = pop();
-
-        if (amount != -1)
-        {
-            printf("Amount = %d\n", amount);
-            sum = sum + amount;
-        }
+        printf("Amount = %d\n", amount);
+        sum = sum + amount;
     }
 
     printf("\nTotal Transaction Amount = %d\n", sum);
