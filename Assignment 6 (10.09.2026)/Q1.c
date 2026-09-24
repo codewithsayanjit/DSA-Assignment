@@ -26,14 +26,14 @@ int precedence(char c)
 
 void push(char c)
 {
-    top++;
+    top = top + 1;
     st[top] = c;
 }
 
 char pop()
 {
     char c = st[top];
-    top--;
+    top = top - 1;
     return c;
 }
 
@@ -62,7 +62,7 @@ void infixtopostfix(char Q[], char P[])
         }
         else if (Q[i] == ')')
         {
-            while (st[top] != '(')
+            while (st[top] != '(' )
             {
                 P[j] = pop();
                 j++;
@@ -88,7 +88,7 @@ int main()
     char Q[100], P[100];
 
     printf("Enter Infix Expression: ");
-    gets(Q);
+    fgets(Q, sizeof(Q), stdin);
 
     infixtopostfix(Q, P);
 
