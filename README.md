@@ -245,7 +245,7 @@ gcc Q1.c -o Q1
 | Assignment 9 | 2 | 2/2 | 🟢 100% |
 | **Total** | **20** | **20/20** | **🟢 100%** |
 
-> Progress reflects the 20 C source files currently present in the repository archive.
+> Progress reflects the 20 C source files currently present in this repository archive.
 
 ---
 
